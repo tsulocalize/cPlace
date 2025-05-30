@@ -1,0 +1,35 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
+  datasource:
+    url: jdbc:h2:mem:database
+    driver-class-name: org.h2.Driver
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: true
+
+chzzk:
+  client-id: ${CHZZK_CLIENT_ID}
+  client-secret: ${CHZZK_CLIENT_SECRET}
+  redirect-uri: ${CHZZK_REDIRECT_URL}
+  origin-pattern: ${CHZZK_ORIGIN_PATTERN}
+  http-only: false
+
+pixel:
+  drawing-time-limit: 5
+  size: 500
+
+redis:
+  host: ${REDIS_HOST}
+  port: ${REDIS_PORT}
+  dirtySet-interval: 5 * 1000
+
+main: true

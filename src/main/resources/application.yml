@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: cPlace
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+
+websocket:
+  ping-interval: 30 * 1000

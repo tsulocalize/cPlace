@@ -1,0 +1,45 @@
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: ${DATA_SOURCE}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DATA_SOURCE_USERNAME}
+    password: ${DATA_SOURCE_PASSWORD}
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  sql:
+    init:
+      mode: never
+
+chzzk:
+  client-id: ${CHZZK_CLIENT_ID}
+  client-secret: ${CHZZK_CLIENT_SECRET}
+  redirect-uri: ${CHZZK_REDIRECT_URL}
+  origin-pattern: ${CHZZK_ORIGIN_PATTERN}
+  http-only: true
+
+pixel:
+  drawing-time-limit: 3 * 60
+  size: 500
+
+redis:
+  host: ${REDIS_HOST}
+  port: ${REDIS_PORT}
+  dirtySet-interval: 30 * 1000
+
+main: false
+
+aws:
+  s3:
+    enable: true
+    region: ap-northeast-2
+    bucket: ${BUCKET_NAME}
+    credentials:
+      access-key: ${S3_ACCESS_KEY}
+      secret-key: ${S3_SECRET_KEY}
