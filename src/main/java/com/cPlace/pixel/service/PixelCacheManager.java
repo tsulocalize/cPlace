@@ -2,6 +2,7 @@ package com.cPlace.pixel.service;
 
 import com.cPlace.pixel.domain.Pixel;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBitSet;
 import org.redisson.api.RBucket;
 import org.redisson.api.RScript;
@@ -23,12 +24,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class PixelCacheManager {
 
     private static final int UNIT_BYTE_SIZE = 6;
-    private static final int TIME_LIMIT = 500; // ms
+    private static final int BROADCAST_INTERVAL = 500; // ms
     private static final String LUA_SCRIPT = """
             local stream_key = KEYS[1]
             local cache_key = KEYS[2]
@@ -120,13 +122,13 @@ public class PixelCacheManager {
     @Scheduled(initialDelayString = "#{${redis.dirtySet-interval}}", fixedRateString = "#{${redis.dirtySet-interval}}")
     void applyDirtySetToCache() {
         if (!isMain) return;
-
+        log.info("[Cache] dirtySet is applied.");
         RScript script = redissonClient.getScript(StringCodec.INSTANCE);
         script.eval(RScript.Mode.READ_WRITE, LUA_SCRIPT, RScript.ReturnType.VALUE,
                 List.of(DIRTY_SET, CANVAS_BIT, "100"));
     }
 
-    @Scheduled(fixedDelay = TIME_LIMIT)
+    @Scheduled(fixedDelay = BROADCAST_INTERVAL)
     synchronized void broadcastDirtySet() {
         long epochMilliSecond = LocalDateTime.now(clock).toEpochSecond(ZoneOffset.ofHours(9)) * 1000;
 

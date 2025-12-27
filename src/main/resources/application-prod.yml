@@ -34,12 +34,3 @@ redis:
   dirtySet-interval: 30 * 1000
 
 main: false
-
-aws:
-  s3:
-    enable: true
-    region: ap-northeast-2
-    bucket: ${BUCKET_NAME}
-    credentials:
-      access-key: ${S3_ACCESS_KEY}
-      secret-key: ${S3_SECRET_KEY}

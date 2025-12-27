@@ -68,9 +68,6 @@ public class AdminService {
     }
 
     private void validateCoordinate(CoverPixelRequest request) {
-        if (request.startX() < 0 || request.startY() < 0) {
-            throw new PixelException(PixelExceptionCode.PIXEL_NOT_FOUND);
-        }
         if (request.endX() >= pixelProperties.getPixelSize() || request.endY() >= pixelProperties.getPixelSize()) {
             throw new PixelException(PixelExceptionCode.PIXEL_NOT_FOUND);
         }
