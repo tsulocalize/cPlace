@@ -1,14 +1,12 @@
 package com.cPlace.pixel.domain;
 
-import com.cPlace.chzzk.domain.ChzzkMember;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,37 +17,23 @@ import java.time.LocalDateTime;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "pixel_map_history")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @ToString
-public class PixelUpdateHistory {
+public class PixelMapHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "position_x")
-    private int positionX;
-
-    @Column(name = "position_y")
-    private int positionY;
-
-    @Enumerated(EnumType.STRING)
-    private Color color;
-
-    private Long chzzkMemberId;
+    @Column(name = "map")
+    private byte[] map;
 
     @CreatedDate
     private LocalDateTime createdAt;
 
-    private PixelUpdateHistory(int positionX, int positionY, Color color, long chzzkMemberId) {
-        this.positionX = positionX;
-        this.positionY = positionY;
-        this.color = color;
-        this.chzzkMemberId = chzzkMemberId;
-    }
-
-    public PixelUpdateHistory(Pixel pixel, ChzzkMember chzzkMember) {
-        this(pixel.x(), pixel.y(), pixel.color(), chzzkMember.getId());
+    public PixelMapHistory(byte[] map) {
+        this.map = map;
     }
 }

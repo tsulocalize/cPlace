@@ -14,6 +14,10 @@ public enum PixelExceptionCode implements CPlaceExceptionCode {
     COLOR_NOT_EXIST("존재하지 않는 색상입니다", 1_002, HttpStatus.BAD_REQUEST),
     TIME_LIMITED("아직 색상을 변경할 수 없습니다", 1_003, HttpStatus.BAD_REQUEST),
     AUTHORIZATION_INVALID("허가되지 않은 행동입니다", 1_004, HttpStatus.UNAUTHORIZED),
+
+    // 2_xxx
+    MAX_HISTORY_SIZE("최대 호출 크기를 초과했습니다", 2_001, HttpStatus.BAD_REQUEST),
+    MAP_HISTORY_ERROR("맵 히스토리를 조회하는데 실패했습니다", 2_002, HttpStatus.INTERNAL_SERVER_ERROR),
     ;
 
     private final String message;

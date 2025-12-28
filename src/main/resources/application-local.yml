@@ -24,8 +24,9 @@ chzzk:
   http-only: false
 
 pixel:
-  drawing-time-limit: 5
+  drawing-time-limit: 5 * 1000
   size: 500
+  map-save-interval: 10 * 1000
 
 redis:
   host: ${REDIS_HOST}

@@ -5,9 +5,9 @@ import com.cPlace.admin.dto.PatchMemberRequest;
 import com.cPlace.admin.service.AdminService;
 import com.cPlace.chzzk.auth.AuthAdmin;
 import com.cPlace.chzzk.domain.ChzzkMember;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,10 +29,9 @@ public class AdminController {
     }
 
     @PostMapping("/admin/pixel")
-    @Validated
     public ResponseEntity<Void> coverPixel(
             @AuthAdmin ChzzkMember admin,
-            @RequestBody CoverPixelRequest request
+            @Valid @RequestBody CoverPixelRequest request
     ) {
         adminService.coverPixel(request);
         return ResponseEntity.noContent().build();

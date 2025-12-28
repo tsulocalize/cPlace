@@ -1,6 +1,6 @@
-CREATE TABLE chzzk_member (
+CREATE TABLE chzzk_members (
     id  BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL ,
-    channel_id VARCHAR(255) NOT NULL ,
+    channel_id VARCHAR(255) UNIQUE NOT NULL ,
     channel_name VARCHAR(255) NOT NULL ,
     access_token VARCHAR(255) NOT NULL ,
     refresh_token VARCHAR(255) NOT NULL ,
@@ -15,6 +15,12 @@ CREATE TABLE pixel_update_history (
     position_x INTEGER NOT NULL ,
     position_y INTEGER NOT NULL ,
     color      VARCHAR(255) NOT NULL ,
-    chzzk_member_id BIGINT ,
+    chzzk_member_id BIGINT NOT NULL ,
     created_at TIMESTAMP NOT NULL
 );
+
+CREATE TABLE pixel_map_history (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL ,
+    map BLOB NOT NULL ,
+    created_at TIMESTAMP NOT NULL
+)

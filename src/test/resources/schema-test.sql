@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS pixel_update_history;
-DROP TABLE IF EXISTS chzzk_member;
+DROP TABLE IF EXISTS chzzk_members;
 
-CREATE TABLE chzzk_member (
+CREATE TABLE chzzk_members (
     id  BIGINT PRIMARY KEY AUTO_INCREMENT NOT NULL ,
     channel_id VARCHAR(255) NOT NULL ,
     channel_name VARCHAR(255) NOT NULL ,

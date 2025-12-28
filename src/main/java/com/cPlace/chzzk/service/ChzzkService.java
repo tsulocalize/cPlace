@@ -59,12 +59,8 @@ public class ChzzkService {
                 .orElseThrow(() -> new ChzzkException(ChzzkExceptionCode.MEMBER_NOT_EXIST));
     }
 
-    private boolean isMember(String channelId) {
-        return chzzkMemberRepository.existsByChannelId(channelId);
-    }
-
     private ChzzkMember registerMember(String channelId, String channelName, String accessToken, String refreshToken) {
-        if (isMember(channelId)) {
+        if (chzzkMemberRepository.existsByChannelId(channelId)) {
             throw new ChzzkException(ChzzkExceptionCode.MEMBER_ALREADY_EXIST);
         }
 
