@@ -78,4 +78,13 @@ public class PixelController {
                 .contentLength(resource.contentLength())
                 .body(resource);
     }
+
+    @GetMapping("/current-user")
+    ResponseEntity<Integer> readCurrentUserCount(
+            @AuthMember ChzzkMember chzzkMember
+    ) {
+        Integer count = pixelService.readCurrentUserCount();
+
+        return ResponseEntity.ok(count);
+    }
 }

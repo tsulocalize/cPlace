@@ -28,10 +28,12 @@ public class PixelWebSocketManager {
         log.info("disconnected with %s".formatted(session.getId()));
     }
 
+    public Integer getSessionCount() {
+        return sessions.size();
+    }
+
     public synchronized void sendPixelChangeToAll(BinaryMessage message) {
-        sessions.forEach((id, session) -> {
-            sendPixels(message, session);
-        });
+        sessions.forEach((id, session) -> sendPixels(message, session));
     }
 
     @Async

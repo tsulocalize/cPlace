@@ -122,7 +122,7 @@ public class PixelCacheManager {
     @Scheduled(initialDelayString = "#{${redis.dirtySet-interval}}", fixedRateString = "#{${redis.dirtySet-interval}}")
     void applyDirtySetToCache() {
         if (!isMain) return;
-        log.info("[Cache] dirtySet is applied.");
+        log.debug("[Cache] dirtySet is applied.");
         RScript script = redissonClient.getScript(StringCodec.INSTANCE);
         script.eval(RScript.Mode.READ_WRITE, LUA_SCRIPT, RScript.ReturnType.VALUE,
                 List.of(DIRTY_SET, CANVAS_BIT, "100"));
@@ -169,5 +169,9 @@ public class PixelCacheManager {
         buffer.put((byte) 0); // padding
 
         return buffer.array();
+    }
+
+    public Integer getCurrentUserCount() {
+        return webSocketManager.getSessionCount();
     }
 }

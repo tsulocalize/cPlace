@@ -128,4 +128,8 @@ public class PixelService {
         PixelMapHistory map = new PixelMapHistory(pixelCacheManager.getCurrentPixels());
         pixelMapHistoryRepository.save(map);
     }
+
+    public Integer readCurrentUserCount() {
+        return pixelCacheManager.getCurrentUserCount();
+    }
 }
